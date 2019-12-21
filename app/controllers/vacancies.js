@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Product = mongoose.model('Vacancies');
+const Product = mongoose.model('Vacancy');
 
 const getAll = (req, res) => {
     Product.find()
