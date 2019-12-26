@@ -16,7 +16,10 @@ const create = (req, res) => {
 };
 
 const update = (req, res) => {
-    Product.findOneAndUpdate({ id: req.params.id }, req.body)
+    Product.findOneAndUpdate({
+        id: req.params.id,
+        'useFindAndModify': false
+    }, req.body)
         .exec()
         .then(product => res.json(product))
         .catch(err => res.status(500).json(err));
