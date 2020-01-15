@@ -1,39 +1,44 @@
 const mongoose = require('mongoose');
 
-const Product = mongoose.model('Vacancy');
+const Vacancy = mongoose.model('Vacancy');
 
 const getAll = (req, res) => {
-    Product.find()
+    Vacancy.find()
         .exec()
         .then(products => res.json(products))
         .catch(err => res.status(500).json(err));
 };
 
+const getOne = (req, res) => {
+    Vacancy.findOne({ id: req.params.id })
+        .exec()
+        .then(vacancy => res.json(vacancy))
+        .catch(err => res.status(500).json(err));
+};
+
 const create = (req, res) => {
-    Product.create(req.body)
-        .then(createProduct => res.json(createProduct))
+    Vacancy.create(req.body)
+        .then(createVacancy => res.json(createVacancy))
         .catch(err => res.status(500).json(err));
 };
 
 const update = (req, res) => {
-    Product.findOneAndUpdate({
-        id: req.params.id,
-        'useFindAndModify': false
-    }, req.body)
+    Vacancy.updateOne({ id: req.params.id }, req.body)
         .exec()
-        .then(product => res.json(product))
+        .then(vacancy => res.json(vacancy))
         .catch(err => res.status(500).json(err));
 };
 
 const remove = (req, res) => {
-    Product.deleteOne({ id: req.params.id })
+    Vacancy.deleteOne({id: req.params.id})
         .exec()
-        .then(() => res.json({ success: true }))
+        .then(() => res.json({success: true}))
         .catch(err => res.status(500).json(err));
 };
 
 module.exports = {
     getAll,
+    getOne,
     create,
     update,
     remove

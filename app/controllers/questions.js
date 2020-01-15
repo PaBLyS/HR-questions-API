@@ -5,20 +5,20 @@ const Questions = mongoose.model('Question');
 const getAll = (req, res) => {
     Questions.find()
         .exec()
-        .then(products => res.json(products))
+        .then(questions => res.json(questions))
         .catch(err => res.status(500).json(err));
 };
 
 const create = (req, res) => {
     Questions.create(req.body)
-        .then(createProduct => res.json(createProduct))
+        .then(createQuestions => res.json(createQuestions))
         .catch(err => res.status(500).json(err));
 };
 
 const update = (req, res) => {
-    Questions.findOneAndUpdate({ id: req.params.id }, req.body)
+    Questions.updateOne({ id: req.params.id }, req.body)
         .exec()
-        .then(product => res.json(product))
+        .then(questions => res.json(questions))
         .catch(err => res.status(500).json(err));
 };
 

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('./app/models');
 const config = require('./config');
+const helpers = require('./app/helpers')
 
 const app = express();
 
@@ -22,3 +23,5 @@ mongoose.connect(mongoUrl, {
         () => console.log('Listening on port ' + appPort + '...')
     ))
     .catch((err) => console.error('Error connection to mongo: ' + mongoUrl + err));
+
+helpers.createAdmin.create()
